@@ -1310,7 +1310,7 @@ body {
         });
         if (!response.ok) throw new Error(`Falha no envio: ${response.status}`);
 
-        const next = new URL('https://black-ratoeira.com.br/qualificacao');
+        const next = new URL('https://qualificacao2.black-ratoeira.com.br/');
         next.searchParams.set('lead_id', leadId);
         next.searchParams.set('nome', name);
         next.searchParams.set('email', email);
