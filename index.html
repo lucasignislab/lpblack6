@@ -472,11 +472,46 @@ section {
   margin-top: 28px;
 }
 .black-card {
+  position: relative;
+  overflow: hidden;
   padding: 22px;
   border-radius: 16px;
   background: #1f1913;
   border: 1px solid #3a2f25;
   color: #f3e6d6;
+  transition: transform 280ms cubic-bezier(0.16, 1, 0.3, 1), border-color 280ms ease, box-shadow 280ms ease;
+}
+.black-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 22px;
+  width: 0;
+  height: 2px;
+  background: var(--yellow);
+  transition: width 320ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.black-card.reveal-in {
+  animation: radar-enter 650ms cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+.black-card:nth-child(2).reveal-in {
+  animation-delay: 110ms;
+}
+.black-card:focus-within {
+  border-color: var(--yellow);
+}
+.black-card:focus-within::before {
+  width: calc(100% - 44px);
+}
+@media (hover: hover) {
+  .black-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--yellow);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.22);
+  }
+  .black-card:hover::before {
+    width: calc(100% - 44px);
+  }
 }
 .black-card h3 {
   color: #fff;
@@ -490,6 +525,22 @@ section {
 }
 .black-card a {
   color: var(--yellow);
+}
+.black-card a:focus-visible {
+  outline: 2px solid var(--yellow);
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .black-card,
+  .black-card::before {
+    transition: none;
+  }
+  .black-card.reveal-in {
+    animation: none;
+  }
+  .black-card:hover {
+    transform: none;
+  }
 }
 .steps-list {
   list-style: none;
@@ -1241,7 +1292,7 @@ body {
       requestAnimationFrame(frame);
     };
 
-    const radarObserver = new IntersectionObserver((entries, observer) => {
+    const revealObserver = new IntersectionObserver((entries, observer) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add('reveal-in');
@@ -1253,8 +1304,8 @@ body {
       });
     }, { threshold: 0.15 });
 
-    document.querySelectorAll('.radar .h2, .radar .lead, .radar .pdf-ph, .radar .outcome, .radar .stat, .radar .btn-inline').forEach((element) => {
-      radarObserver.observe(element);
+    document.querySelectorAll('.radar .h2, .radar .lead, .radar .pdf-ph, .radar .outcome, .radar .stat, .radar .btn-inline, .black-card').forEach((element) => {
+      revealObserver.observe(element);
     });
   }
 </script>
