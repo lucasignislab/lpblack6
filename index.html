@@ -529,15 +529,20 @@ section {
 }
 .proof-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  grid-template-columns: 1fr;
+  gap: 16px;
   margin-top: 28px;
+  align-items: start;
+}
+.proof-grid + .proof-grid {
+  margin-top: 16px;
 }
 .proof-grid img {
   border-radius: 12px;
   border: 1px solid var(--line);
   width: 100%;
-  object-fit: cover;
+  height: auto;
+  display: block;
 }
 .caption {
   margin-top: 12px;
@@ -572,14 +577,18 @@ section {
   .steps-list {
     grid-template-columns: repeat(3, 1fr);
   }
-  .proof-grid {
-    grid-template-columns: repeat(3, 1fr);
+  .proof-grid--wide,
+  .proof-grid--tall {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   section {
     padding: 72px 0;
   }
 }
 @media (min-width: 1024px) {
+  .proof-grid--tall {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
   .hero {
     padding: 56px 0 72px;
   }
@@ -851,7 +860,19 @@ body {
 <section class="proof">
   <div class="wrap">
     <h2 data-gjs-type="heading" class="h2 center">A operação real dos nossos clientes</h2>
-    <div class="proof-grid">
+    <div class="proof-grid proof-grid--wide">
+      <img
+        src="https://black-ratoeira.com.br/assets/testimonial-feedback-fantasticos.webp"
+        alt="Cliente elogia a equipe da Ratoeira"
+        id="ic3ey4"
+      />
+      <img
+        src="https://black-ratoeira.com.br/assets/testimonial-luise-atendimento.webp"
+        alt="Cliente dá nota máxima ao atendimento"
+        id="ichdun"
+      />
+    </div>
+    <div class="proof-grid proof-grid--tall">
       <img
         src="https://black-ratoeira.com.br/assets/testimonial-vendas-buygoods.webp"
         alt="Notificações de vendas aprovadas em dólar pela Ratoeira na BuyGoods"
@@ -866,16 +887,6 @@ body {
         src="https://black-ratoeira.com.br/assets/testimonial-vendas-gurumedia.webp"
         alt="Notificações de vendas em dólar pela Ratoeira na GuruMedia"
         id="i5j291"
-      />
-      <img
-        src="https://black-ratoeira.com.br/assets/testimonial-feedback-fantasticos.webp"
-        alt="Cliente elogia a equipe da Ratoeira"
-        id="ic3ey4"
-      />
-      <img
-        src="https://black-ratoeira.com.br/assets/testimonial-luise-atendimento.webp"
-        alt="Cliente dá nota máxima ao atendimento"
-        id="ichdun"
       />
       <img
         src="https://black-ratoeira.com.br/assets/testimonial-vendas-mediascalers.webp"
