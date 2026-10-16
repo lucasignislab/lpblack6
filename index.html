@@ -656,7 +656,7 @@ body {
       <h2 data-gjs-type="heading" class="form-title">
         Receba o Radar de Mercado + o link da live do dia 29
       </h2>
-      <form id="lead-form" action="#" method="post" novalidate="">
+      <form id="lead-form" method="post" data-webhook="https://n8n.srv1145908.hstgr.cloud/webhook/black-friday-2026" novalidate="">
         <label>
           Nome
           <input type="text" name="name" autocomplete="name" placeholder="Seu nome" required="" />
@@ -675,7 +675,7 @@ body {
             </select>
             <input
               type="tel"
-              name="phone"
+              name="whatsapp"
               autocomplete="tel"
               placeholder="(DDD) 99999-9999"
               required=""
@@ -693,6 +693,7 @@ body {
           />
         </label>
         <input type="hidden" name="lp" value="v6" />
+        <input type="hidden" name="lead_id" />
         <input type="hidden" name="utm_source" />
         <input type="hidden" name="utm_medium" />
         <input type="hidden" name="utm_campaign" />
@@ -906,54 +907,61 @@ body {
   </div>
 </footer>
 
-  <script>(function () {
-  try {
-    (function () {
-      var form = document.getElementById('lead-form');
-      if (!form) {
+  <script>
+    const leadForm = document.getElementById('lead-form');
+    const leadMessage = document.getElementById('form-msg');
+    const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+    const urlParams = new URLSearchParams(window.location.search);
+
+    utmKeys.forEach((key) => {
+      const input = leadForm.elements.namedItem(key);
+      if (urlParams.has(key)) input.value = urlParams.get(key);
+    });
+
+    leadForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const name = leadForm.elements.namedItem('name').value.trim();
+      const whatsapp = leadForm.elements.namedItem('whatsapp').value.replace(/\D/g, '');
+      const email = leadForm.elements.namedItem('email').value.trim();
+      const ddi = leadForm.elements.namedItem('ddi').value;
+      const valid = name.length > 1 && whatsapp.length >= (ddi === '+55' ? 10 : 6) && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+      if (!valid) {
+        leadMessage.textContent = 'Confira nome, WhatsApp com DDD e e-mail.';
         return;
       }
-      var params = new URLSearchParams(window.location.search);
-      var keys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
-      keys.forEach(function (k) {
-        var el = form.querySelector('input[name="' + k + '"]');
-        if (el && params.get(k)) {
-          el.value = params.get(k);
-        }
-      });
-      var msg = document.getElementById('form-msg');
-      form.addEventListener('submit', function (e) {
-        var name = form.name.value.trim();
-        var phone = form.phone.value.replace(/\D/g, '');
-        var email = form.email.value.trim();
-        var ok = name.length > 1 && phone.length >= 10 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-        if (!ok) {
-          e.preventDefault();
-          msg.textContent = 'Confira nome, WhatsApp com DDD e e-mail.';
-          return;
-        }
-        msg.textContent = '';
-        // TODO webdesigner: ligar este formulário na mesma integração GHL da v1 (campo lp = v6) e,
-        // após o envio, redirecionar para black-ratoeira.com.br/qualificacao levando as UTMs.
-        if (form.getAttribute('action') === '#') {
-          e.preventDefault();
-          var next = new URL('https://black-ratoeira.com.br/qualificacao');
-          params.forEach(function (v, k) {
-            next.searchParams.set(k, v);
-          });
-          console.warn(
-            '[LP v6] Formulário ainda sem integração GHL. Destino após envio:',
-            next.toString()
-          );
-          msg.textContent = 'Rascunho: integração do formulário pendente.';
-        }
-      });
-    })();
-  } catch (error) {
-    console.error('Error in page script:', error);
-  }
-})();
-</script>
+
+      const submitButton = leadForm.querySelector('button[type="submit"]');
+      const leadId = crypto.randomUUID();
+      leadForm.elements.namedItem('lead_id').value = leadId;
+      submitButton.disabled = true;
+      leadMessage.textContent = 'Enviando...';
+
+      try {
+        const response = await fetch(leadForm.dataset.webhook, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(new FormData(leadForm)).toString()
+        });
+        if (!response.ok) throw new Error(`Falha no envio: ${response.status}`);
+
+        const next = new URL('https://black-ratoeira.com.br/qualificacao');
+        next.searchParams.set('lead_id', leadId);
+        next.searchParams.set('nome', name);
+        next.searchParams.set('email', email);
+        next.searchParams.set('whatsapp', `${ddi} ${leadForm.elements.namedItem('whatsapp').value}`);
+        utmKeys.forEach((key) => {
+          const value = leadForm.elements.namedItem(key).value;
+          if (value) next.searchParams.set(key, value);
+        });
+        window.location.assign(next.toString());
+      } catch (error) {
+        console.error('Falha ao enviar cadastro:', error);
+        leadMessage.textContent = 'Não foi possível enviar agora. Tente novamente.';
+        submitButton.disabled = false;
+      }
+    });
+  </script>
 <script>
   if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     const animateCount = (element) => {
