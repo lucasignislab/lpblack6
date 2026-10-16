@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page</title>
+  
+  <style>:root {
+  --bg: #fff7ed;
+  --ink: #17120d;
+  --muted: #5d5246;
+  --orange: #f2784b;
+  --yellow: #f5b82e;
+  --dark: #120e0a;
+  --card: #ffffff;
+  --line: #f0dfc8;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  font-family:
+    'Inter',
+    system-ui,
+    -apple-system,
+    sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+a {
+  color: inherit;
+}
+.wrap {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+.center {
+  text-align: center;
+}
+.topbar {
+  background: var(--dark);
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+.topbar-in {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 52px;
+  gap: 12px;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  font-size: 13px;
+}
+.brand img {
+  height: 26px;
+  width: auto;
+}
+.live-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 6px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ff4d4d;
+  box-shadow: 0 0 0 0 rgba(255, 77, 77, 0.7);
+  animation: pulse 1.6s infinite;
+}
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 77, 77, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(255, 77, 77, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 77, 77, 0);
+  }
+}
+.hero {
+  padding: 32px 0 48px;
+}
+.hero-grid {
+  display: grid;
+  gap: 28px;
+}
+.eyebrow {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: var(--orange);
+  margin-bottom: 12px;
+}
+.eyebrow.light {
+  color: var(--yellow);
+}
+h1 {
+  font-size: 30px;
+  line-height: 1.12;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+.sub {
+  margin-top: 16px;
+  font-size: 17px;
+  color: var(--muted);
+}
+.sub strong {
+  color: var(--ink);
+}
+.hero-checks {
+  list-style: none;
+  margin-top: 20px;
+  display: grid;
+  gap: 8px;
+}
+.hero-checks li {
+  position: relative;
+  padding-left: 28px;
+  font-weight: 600;
+}
+.hero-checks li:before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--orange);
+  color: #fff;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+}
+.form-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 22px;
+  box-shadow: 0 20px 50px -20px rgba(120, 60, 10, 0.25);
+  scroll-margin-top: 70px;
+}
+.form-kicker {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: var(--orange);
+  text-transform: uppercase;
+}
+.form-title {
+  font-size: 20px;
+  line-height: 1.25;
+  font-weight: 800;
+  margin: 6px 0 16px;
+}
+form label {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+form input,
+form select {
+  width: 100%;
+  margin-top: 6px;
+  font: inherit;
+  font-size: 16px;
+  padding: 13px 14px;
+  border: 1.5px solid #e6d5bf;
+  border-radius: 12px;
+  background: #fffdfa;
+  color: var(--ink);
+}
+form input:focus,
+form select:focus {
+  outline: none;
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px rgba(242, 120, 75, 0.18);
+}
+.phone {
+  display: flex;
+  gap: 8px;
+}
+.phone select {
+  width: 108px;
+  flex: 0 0 108px;
+}
+.btn {
+  display: block;
+  width: 100%;
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+  font-size: 17px;
+  color: #fff;
+  background: linear-gradient(180deg, #f58a5e, #ea6431);
+  padding: 16px 20px;
+  border-radius: 14px;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0 10px 24px -10px rgba(234, 100, 49, 0.8);
+  transition: transform 0.15s;
+}
+.btn:hover {
+  transform: translateY(-1px);
+}
+.btn-inline {
+  display: inline-block;
+  width: auto;
+  margin-top: 28px;
+  padding: 16px 32px;
+}
+.form-msg {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #c0392b;
+  font-weight: 600;
+  min-height: 1em;
+}
+.micro {
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.h2 {
+  font-size: 26px;
+  line-height: 1.15;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+.h2.light {
+  color: #fff;
+}
+.lead {
+  margin: 12px auto 0;
+  max-width: 680px;
+  color: var(--muted);
+  font-size: 16px;
+}
+section {
+  padding: 56px 0;
+}
+.radar {
+  background: #fff;
+}
+.radar .h2::after {
+  content: '';
+  display: block;
+  width: 76px;
+  height: 4px;
+  margin: 18px auto 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--orange), var(--yellow));
+}
+.radar-grid {
+  display: grid;
+  gap: 24px;
+  margin-top: 32px;
+}
+.pdf-ph {
+  display: grid;
+  place-items: center;
+  min-height: 340px;
+}
+.pdf-stack {
+  position: relative;
+  width: 230px;
+  aspect-ratio: 992 / 1404;
+}
+.pdf-stack img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  box-shadow: 0 18px 32px rgba(18, 14, 10, 0.18);
+  transition: transform 450ms cubic-bezier(0.16, 1, 0.3, 1), outline-color 300ms ease;
+}
+.pdf-stack img:nth-child(1) {
+  transform: translate(-72px, 7px) rotate(-9deg);
+}
+.pdf-stack img:nth-child(2) {
+  transform: translate(72px, 7px) rotate(9deg);
+}
+.pdf-stack img:nth-child(3) {
+  outline: 1px solid var(--yellow);
+}
+.pdf-stack img:nth-child(-n + 2) {
+  outline: 1px solid var(--line);
+}
+.outcomes {
+  display: grid;
+  gap: 12px;
+}
+.outcome {
+  display: flex;
+  gap: 14px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--bg);
+  transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1), border-color 260ms ease, background-color 260ms ease;
+}
+.outcome .n {
+  font-weight: 900;
+  color: var(--orange);
+  font-size: 18px;
+  min-width: 28px;
+  transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.outcome h3 {
+  font-size: 16px;
+  font-weight: 800;
+}
+.outcome p {
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+.stats {
+  display: grid;
+  gap: 12px;
+  margin-top: 28px;
+}
+.stat {
+  padding: 18px;
+  border-radius: 14px;
+  background: var(--dark);
+  color: #fff;
+  border: 1px solid transparent;
+  transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1), border-color 260ms ease;
+}
+.stat strong {
+  display: block;
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--yellow);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.stat span {
+  display: block;
+  margin-top: 8px;
+  font-size: 14px;
+  color: #e9dccb;
+}
+@media (hover: hover) {
+  .pdf-stack:hover img:nth-child(1) {
+    transform: translate(-88px, -4px) rotate(-13deg);
+  }
+  .pdf-stack:hover img:nth-child(2) {
+    transform: translate(88px, -4px) rotate(13deg);
+  }
+  .pdf-stack:hover img:nth-child(3) {
+    transform: translateY(-10px);
+    outline-color: var(--orange);
+  }
+  .outcome:hover {
+    transform: translateX(6px);
+    border-color: var(--orange);
+    background: #fff;
+  }
+  .outcome:hover .n {
+    transform: translateY(-2px);
+  }
+  .stat:hover {
+    transform: translateY(-4px);
+    border-color: var(--yellow);
+  }
+}
+@media (max-width: 767px) {
+  .pdf-stack {
+    width: min(200px, 56vw);
+  }
+  .pdf-stack img:nth-child(1) {
+    transform: translate(-30px, 6px) rotate(-8deg);
+  }
+  .pdf-stack img:nth-child(2) {
+    transform: translate(30px, 6px) rotate(8deg);
+  }
+  .pdf-stack:hover img:nth-child(1) {
+    transform: translate(-40px, 0) rotate(-11deg);
+  }
+  .pdf-stack:hover img:nth-child(2) {
+    transform: translate(40px, 0) rotate(11deg);
+  }
+}
+@keyframes radar-enter {
+  from {
+    opacity: 0.55;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.radar .reveal-in {
+  animation: radar-enter 650ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.radar .outcome:nth-child(2),
+.radar .stat:nth-child(2) {
+  animation-delay: 80ms;
+}
+.radar .outcome:nth-child(3),
+.radar .stat:nth-child(3) {
+  animation-delay: 160ms;
+}
+.radar .outcome:nth-child(4) {
+  animation-delay: 240ms;
+}
+@media (prefers-reduced-motion: reduce) {
+  .radar .reveal-in {
+    animation: none;
+  }
+  .radar .pdf-stack img,
+  .radar .outcome,
+  .radar .outcome .n,
+  .radar .stat {
+    transition: none;
+  }
+  .radar .pdf-stack:hover img:nth-child(1),
+  .radar .pdf-stack:hover img:nth-child(2),
+  .radar .pdf-stack:hover img:nth-child(3),
+  .radar .outcome:hover,
+  .radar .outcome:hover .n,
+  .radar .stat:hover {
+    transform: none;
+  }
+}
+.black {
+  background: var(--dark);
+}
+.black-grid {
+  display: grid;
+  gap: 14px;
+  margin-top: 28px;
+}
+.black-card {
+  padding: 22px;
+  border-radius: 16px;
+  background: #1f1913;
+  border: 1px solid #3a2f25;
+  color: #f3e6d6;
+}
+.black-card h3 {
+  color: #fff;
+  font-size: 19px;
+  font-weight: 800;
+  line-height: 1.25;
+}
+.black-card p {
+  margin-top: 8px;
+  font-size: 14px;
+}
+.black-card a {
+  color: var(--yellow);
+}
+.steps-list {
+  list-style: none;
+  display: grid;
+  gap: 14px;
+  margin-top: 28px;
+}
+.steps-list li {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 20px;
+}
+.steps-list span {
+  display: inline-flex;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--orange);
+  color: #fff;
+  font-weight: 900;
+  align-items: center;
+  justify-content: center;
+}
+.steps-list h3 {
+  margin-top: 10px;
+  font-size: 17px;
+  font-weight: 800;
+}
+.steps-list p {
+  margin-top: 4px;
+  font-size: 14px;
+  color: var(--muted);
+}
+.proof {
+  background: #fff;
+}
+.proof-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-top: 28px;
+}
+.proof-grid img {
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  width: 100%;
+  object-fit: cover;
+}
+.caption {
+  margin-top: 12px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.final {
+  background: var(--bg);
+}
+.footer {
+  background: var(--dark);
+  color: #bfae99;
+  font-size: 12px;
+  padding: 24px 0;
+}
+.footer p + p {
+  margin-top: 4px;
+}
+@media (min-width: 768px) {
+  h1 {
+    font-size: 40px;
+  }
+  .h2 {
+    font-size: 34px;
+  }
+  .stats {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .black-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .steps-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .proof-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  section {
+    padding: 72px 0;
+  }
+}
+@media (min-width: 1024px) {
+  .hero {
+    padding: 56px 0 72px;
+  }
+  .hero-grid {
+    grid-template-columns: 1.25fr 1fr;
+    align-items: start;
+    gap: 48px;
+  }
+  .form-card {
+    position: sticky;
+    top: 76px;
+    padding: 28px;
+  }
+  h1 {
+    font-size: 44px;
+  }
+  .radar-grid {
+    grid-template-columns: 1fr 1.2fr;
+    align-items: center;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+</style>
+</head>
+<body>
+  <div class="topbar">
+  <div class="wrap topbar-in">
+    <a href="#top" data-gjs-type="link" class="brand">
+      <img src="https://black-ratoeira.com.br/assets/ratoeira-mark.png" alt="Ratoeira" id="izfs" />
+      <span data-gjs-type="text">PRÉ-BLACK</span>
+    </a>
+    <span class="live-pill">
+      <span class="dot"></span>
+      AO VIVO · 29/10 às 19h30
+    </span>
+  </div>
+</div>
+<header id="top" class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p data-gjs-type="text" class="eyebrow">PRÉ-BLACK NOVEMBER DA RATOEIRA · LISTA GRATUITA</p>
+      <h1 data-gjs-type="heading">
+        Pare de escolher oferta no chute.
+        <span data-gjs-type="text">
+          Saiba qual nicho, país e rede estão vendendo agora
+        </span>
+        — antes de gastar seu próximo real em anúncio.
+      </h1>
+      <p data-gjs-type="text" class="sub">
+        Entre na lista da Pré-Black e receba o
+        <strong data-gjs-type="text">Radar de Mercado da Ratoeira</strong>
+        : o mapa do que vendeu em 365 mil vendas de afiliados e produtores no tráfego pago. E no dia
+        <strong data-gjs-type="text">29/10, às 19h30, ao vivo</strong>
+        , eu abro as ofertas da Black com
+        <strong data-gjs-type="text">preço menor que na própria Black November</strong>
+        .
+      </p>
+      <ul data-gjs-type="list" class="hero-checks">
+        <li data-gjs-type="text">Qual nicho está crescendo e qual está morrendo</li>
+        <li data-gjs-type="text">Onde cada nicho vende mais: país e rede de tráfego</li>
+        <li data-gjs-type="text">
+          Acesso à live das ofertas da Black (só para quem está na lista)
+        </li>
+      </ul>
+    </div>
+    <div id="oferta" class="form-card">
+      <p data-gjs-type="text" class="form-kicker">Entre na lista da Pré-Black</p>
+      <h2 data-gjs-type="heading" class="form-title">
+        Receba o Radar de Mercado + o link da live do dia 29
+      </h2>
+      <form id="lead-form" action="#" method="post" novalidate="">
+        <label>
+          Nome
+          <input type="text" name="name" autocomplete="name" placeholder="Seu nome" required="" />
+        </label>
+        <label>
+          WhatsApp
+          <div class="phone">
+            <select name="ddi" aria-label="DDI">
+              <option data-gjs-type="text" value="+55" selected="">🇧🇷 +55</option>
+              <option data-gjs-type="text" value="+351">🇵🇹 +351</option>
+              <option data-gjs-type="text" value="+1">🇺🇸 +1</option>
+              <option data-gjs-type="text" value="+54">🇦🇷 +54</option>
+              <option data-gjs-type="text" value="+57">🇨🇴 +57</option>
+              <option data-gjs-type="text" value="+52">🇲🇽 +52</option>
+              <option data-gjs-type="text" value="+34">🇪🇸 +34</option>
+            </select>
+            <input
+              type="tel"
+              name="phone"
+              autocomplete="tel"
+              placeholder="(DDD) 99999-9999"
+              required=""
+            />
+          </div>
+        </label>
+        <label>
+          Seu melhor e-mail
+          <input
+            type="email"
+            name="email"
+            autocomplete="email"
+            placeholder="voce@email.com"
+            required=""
+          />
+        </label>
+        <input type="hidden" name="lp" value="v6" />
+        <input type="hidden" name="utm_source" />
+        <input type="hidden" name="utm_medium" />
+        <input type="hidden" name="utm_campaign" />
+        <input type="hidden" name="utm_content" />
+        <input type="hidden" name="utm_term" />
+        <button data-gjs-type="text" type="submit" class="btn">
+          Quero o Radar e o link da live
+        </button>
+        <p id="form-msg" role="alert" class="form-msg"></p>
+        <p data-gjs-type="text" class="micro">
+          Depois do cadastro, responda algumas perguntas rápidas e o Radar chega no seu e-mail. Sem
+          spam: só o Radar, o aviso da live e a abertura das ofertas.
+        </p>
+      </form>
+    </div>
+  </div>
+</header>
+<section class="radar" id="ioe0y">
+  <div class="wrap">
+    <p data-gjs-type="text" class="eyebrow center">O QUE O RADAR TE MOSTRA</p>
+    <h2 data-gjs-type="heading" class="h2 center">
+      Decida onde investir com dado, não com print de grupo
+    </h2>
+    <p data-gjs-type="text" class="lead center">
+      365 mil vendas de tráfego pago, de abril a setembro de 2026, em mais de 25 plataformas.
+      Agregado e anônimo: nenhum cliente, produto ou oferta é identificado.
+    </p>
+    <div class="radar-grid">
+      <div class="pdf-ph">
+        <div class="pdf-stack">
+          <img src="assets/radar-page-02.png" alt="Página 2 do Radar: Como ler este relatório" width="992" height="1404" loading="lazy" />
+          <img src="assets/radar-page-05.png" alt="Página 5 do Radar: Funil ponta a ponta e janela de decisão" width="992" height="1404" loading="lazy" />
+          <img src="assets/radar-page-01.png" alt="Capa do Radar de Mercado" width="992" height="1404" loading="lazy" id="i0f9ie" />
+        </div>
+      </div>
+      <div class="outcomes">
+        <div class="outcome">
+          <span data-gjs-type="text" class="n">01</span>
+          <div>
+            <h3 data-gjs-type="heading">Qual nicho está subindo e qual está morrendo</h3>
+            <p data-gjs-type="text">
+              Antes de colocar dinheiro numa oferta, você vê a tendência de cada nicho mês a mês.
+            </p>
+          </div>
+        </div>
+        <div class="outcome">
+          <span data-gjs-type="text" class="n">02</span>
+          <div>
+            <h3 data-gjs-type="heading">Em qual país e rede cada nicho vende</h3>
+            <p data-gjs-type="text">
+              Google, Meta, Taboola, NewsBreak, MGID e TikTok — e o que vende em cada país.
+            </p>
+          </div>
+        </div>
+        <div class="outcome">
+          <span data-gjs-type="text" class="n">03</span>
+          <div>
+            <h3 data-gjs-type="heading">Qual faixa de ticket mais converte</h3>
+            <p data-gjs-type="text">
+              A conversão de checkout por faixa de comissão, por nicho e por plataforma.
+            </p>
+          </div>
+        </div>
+        <div class="outcome">
+          <span data-gjs-type="text" class="n">04</span>
+          <div>
+            <h3 data-gjs-type="heading">Quando concentrar a verba</h3>
+            <p data-gjs-type="text">
+              O dia e o horário em que a venda acontece, por rede e por país do comprador.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat">
+        <strong data-gjs-type="text" data-count="-84">−84%</strong>
+        <span data-gjs-type="text">
+          foi a queda de neuropatia entre abril e setembro, enquanto saúde masculina subiu 57%
+        </span>
+      </div>
+      <div class="stat">
+        <strong data-gjs-type="text" data-count="97">97%</strong>
+        <span data-gjs-type="text">das compras acontecem no mesmo dia da primeira visita</span>
+      </div>
+      <div class="stat">
+        <strong data-gjs-type="text" data-count="28.5" data-decimals="1">28,5%</strong>
+        <span data-gjs-type="text">
+          é a conversão de checkout da faixa de comissão que mais converte
+        </span>
+      </div>
+    </div>
+    <div class="center">
+      <a href="#oferta" data-gjs-type="link" class="btn btn-inline">Quero receber o Radar</a>
+    </div>
+  </div>
+</section>
+<section class="black">
+  <div class="wrap">
+    <p data-gjs-type="text" class="eyebrow center light">E NO DIA 29/10, ÀS 19H30, AO VIVO</p>
+    <h2 data-gjs-type="heading" class="h2 center light">
+      Abro as ofertas da Black para quem está na lista
+    </h2>
+    <div class="black-grid">
+      <div class="black-card">
+        <h3 data-gjs-type="heading">90% das suas vendas trackeadas. Ou seu dinheiro de volta.</h3>
+        <p data-gjs-type="text">
+          A gente garante isso no painel da Ratoeira, e você tem 3 meses para cobrar.
+          <a
+            href="https://black-ratoeira.com.br/termo-garantia"
+            target="_blank"
+            rel="noopener"
+            data-gjs-type="link"
+          >
+            Condições no Termo da Garantia
+          </a>
+          .
+        </p>
+      </div>
+      <div class="black-card">
+        <h3 data-gjs-type="heading">Preço menor que na própria Black November</h3>
+        <p data-gjs-type="text">
+          As condições abrem ao vivo, no dia 29. O link da live vai só para quem estiver na lista.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="steps">
+  <div class="wrap">
+    <h2 data-gjs-type="heading" class="h2 center">Como funciona</h2>
+    <ol data-gjs-type="list" class="steps-list">
+      <li>
+        <span data-gjs-type="text">1</span>
+        <h3 data-gjs-type="heading">Entre na lista</h3>
+        <p data-gjs-type="text">Nome, WhatsApp e e-mail. Leva menos de um minuto.</p>
+      </li>
+      <li>
+        <span data-gjs-type="text">2</span>
+        <h3 data-gjs-type="heading">Responda algumas perguntas</h3>
+        <p data-gjs-type="text">
+          Sobre a sua operação, para a gente te mostrar a condição certa na live.
+        </p>
+      </li>
+      <li>
+        <span data-gjs-type="text">3</span>
+        <h3 data-gjs-type="heading">Receba o Radar e o link da live</h3>
+        <p data-gjs-type="text">
+          O Radar chega no seu e-mail. O link da live do dia 29 chega no WhatsApp e no e-mail.
+        </p>
+      </li>
+    </ol>
+  </div>
+</section>
+<section class="proof">
+  <div class="wrap">
+    <h2 data-gjs-type="heading" class="h2 center">A operação real dos nossos clientes</h2>
+    <div class="proof-grid">
+      <img
+        src="https://black-ratoeira.com.br/assets/testimonial-vendas-buygoods.webp"
+        alt="Notificações de vendas aprovadas em dólar pela Ratoeira na BuyGoods"
+        id="ijnt25"
+      />
+      <img
+        src="https://black-ratoeira.com.br/assets/testimonial-faturamento-carlos.webp"
+        alt="Cliente com mais de três milhões de reais faturados em 2026"
+        id="iay8c6"
+      />
+      <img
+        src="https://black-ratoeira.com.br/assets/testimonial-vendas-gurumedia.webp"
+        alt="Notificações de vendas em dólar pela Ratoeira na GuruMedia"
+        id="i5j291"
+      />
+      <img
+        src="https://black-ratoeira.com.br/assets/testimonial-feedback-fantasticos.webp"
+        alt="Cliente elogia a equipe da Ratoeira"
+        id="ic3ey4"
+      />
+      <img
+        src="https://black-ratoeira.com.br/assets/testimonial-luise-atendimento.webp"
+        alt="Cliente dá nota máxima ao atendimento"
+        id="ichdun"
+      />
+      <img
+        src="https://black-ratoeira.com.br/assets/testimonial-vendas-mediascalers.webp"
+        alt="Vendas em dólar pela Ratoeira na MediaScalers e GuruMedia"
+        id="ilocel"
+      />
+    </div>
+    <p data-gjs-type="text" class="caption center">
+      Notificações, painéis e conversas de clientes reais da Ratoeira.
+    </p>
+  </div>
+</section>
+<section class="final">
+  <div class="wrap center">
+    <h2 data-gjs-type="heading" class="h2">Entre na Black sabendo onde está o dinheiro</h2>
+    <p data-gjs-type="text" class="lead">
+      Radar de Mercado no seu e-mail + o link da live das ofertas, dia 29/10 às 19h30.
+    </p>
+    <a href="#oferta" data-gjs-type="link" class="btn btn-inline">Quero entrar na lista</a>
+  </div>
+</section>
+<footer class="footer">
+  <div class="wrap center">
+    <p data-gjs-type="text">Ratoeira Ads · CNPJ 55.824.986/0001-06</p>
+    <p data-gjs-type="text">
+      Alameda Rio Negro, 503, sala 2020, Alphaville, Barueri/SP, CEP 06.454-000
+    </p>
+    <p data-gjs-type="text" id="i1rwaw">© 2026 Ratoeira. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+  <script>(function () {
+  try {
+    (function () {
+      var form = document.getElementById('lead-form');
+      if (!form) {
+        return;
+      }
+      var params = new URLSearchParams(window.location.search);
+      var keys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+      keys.forEach(function (k) {
+        var el = form.querySelector('input[name="' + k + '"]');
+        if (el && params.get(k)) {
+          el.value = params.get(k);
+        }
+      });
+      var msg = document.getElementById('form-msg');
+      form.addEventListener('submit', function (e) {
+        var name = form.name.value.trim();
+        var phone = form.phone.value.replace(/\D/g, '');
+        var email = form.email.value.trim();
+        var ok = name.length > 1 && phone.length >= 10 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        if (!ok) {
+          e.preventDefault();
+          msg.textContent = 'Confira nome, WhatsApp com DDD e e-mail.';
+          return;
+        }
+        msg.textContent = '';
+        // TODO webdesigner: ligar este formulário na mesma integração GHL da v1 (campo lp = v6) e,
+        // após o envio, redirecionar para black-ratoeira.com.br/qualificacao levando as UTMs.
+        if (form.getAttribute('action') === '#') {
+          e.preventDefault();
+          var next = new URL('https://black-ratoeira.com.br/qualificacao');
+          params.forEach(function (v, k) {
+            next.searchParams.set(k, v);
+          });
+          console.warn(
+            '[LP v6] Formulário ainda sem integração GHL. Destino após envio:',
+            next.toString()
+          );
+          msg.textContent = 'Rascunho: integração do formulário pendente.';
+        }
+      });
+    })();
+  } catch (error) {
+    console.error('Error in page script:', error);
+  }
+})();
+</script>
+<script>
+  if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const animateCount = (element) => {
+      const target = Number(element.dataset.count);
+      const decimals = Number(element.dataset.decimals || 0);
+      const formatter = new Intl.NumberFormat('pt-BR', {
+        minimumFractionDigits: decimals,
+        maximumFractionDigits: decimals
+      });
+      const finalText = element.textContent;
+      const start = performance.now();
+
+      const frame = (now) => {
+        const progress = Math.min((now - start) / 1300, 1);
+        const value = Math.abs(target) * (1 - (1 - progress) ** 3);
+        element.textContent = `${target < 0 ? '−' : ''}${formatter.format(value)}%`;
+        if (progress < 1) {
+          requestAnimationFrame(frame);
+        } else {
+          element.textContent = finalText;
+        }
+      };
+
+      requestAnimationFrame(frame);
+    };
+
+    const radarObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('reveal-in');
+          if (entry.target.classList.contains('stat')) {
+            animateCount(entry.target.querySelector('strong'));
+          }
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.radar .h2, .radar .lead, .radar .pdf-ph, .radar .outcome, .radar .stat, .radar .btn-inline').forEach((element) => {
+      radarObserver.observe(element);
+    });
+  }
+</script>
+</body>
+</html>
